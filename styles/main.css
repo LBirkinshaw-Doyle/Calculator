@@ -1,7 +1,25 @@
 html{
     height: 100%;
     margin: 0;
-    background-color: linear-gradient(50deg, rgba(214,242,255,1) 0%, rgba(122,186,230,1) 100%);;
     color: #00487C;
     font-family: "Lucida Console", "Courier New", monospace;
+}
+body{
+    display: flex;
+    flex-direction: column;
+    background-image: linear-gradient(50deg, rgba(214,242,255,1) 0%, rgba(122,186,230,1) 100%);
+}
+header{
+    display: flex;
+    flex-direction: row-reverse;
+    margin: 1%;
+    border-bottom: 1px solid #EDF67D;
+}
+nav{
+    display: flex;
+    flex-direction: row-reverse;
+    margin: 0.5%;
+}
+.navigation{
+    padding: 5%;
 }
