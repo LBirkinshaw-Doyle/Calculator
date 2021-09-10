@@ -15,7 +15,7 @@ header{
     display: flex;
     flex-direction: row-reverse;
     margin: 1%;
-    border-bottom: 1px solid #EDF67D;
+    border-bottom: 1px solid #00487C;
 }
 nav{
     display: flex;
@@ -30,6 +30,13 @@ h2{
 
 .navigation{
     padding: 5%;
+    border: 1px solid transparent;
+    border-radius: 15px;
+}
+.navigation:hover{
+    border: 1px solid #00487C;
+    border-radius: 15px;
+    background: rgba(0, 0, 0, 0.05);
 }
 .content-container{
     display: flex;
@@ -44,7 +51,7 @@ h2{
     width: 350px;
     height: 70%;
     max-height: 620px;
-    background-color: #47648a;
+    background-color: #324864;
     box-shadow: 0 10px 6px -6px #000;
     border: 2px solid #283950;
     border-radius: 5px;
@@ -73,30 +80,35 @@ h2{
 .button{
     min-width: 25px;
     min-height: 25px;
-    width: 20%;
-    height: 10%;
-    margin: 2.5%;
+    width: 19%;
+    height: 20%;
+    margin: 1%;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 10px;
+    border-radius: 20px;
     color: black;
     font-weight: bold;
+    font-size: 120%;
+    border: 1px solid black;
 }
 .number{
-    background: rgb(170, 170, 170);
-    box-shadow: 0 5px 3px -3px #000;
+    background: rgb(100, 100, 100);
+}
+.number:hover{
+    background: rgb(150, 150, 150);
 }
 .operator{
-    background: rgb(170, 80, 80);
-    box-shadow: 0 5px 3px -3px #000;
+    background: rgb(100, 167, 206);
 }
-
+.operator:hover{
+    background: rgb(214, 90, 90)
+}
 #sidebar{
     width: 20%;
     height: 100%;
     margin: 1%;
-    border-right: 1px solid #EDF67D;
+    border-right: 1px solid #00487C;
 }
 #active-content{
     width: 80%;
