@@ -27,6 +27,7 @@ h2{
     font-weight: bold;
     padding-bottom: 5%;
 }
+
 .navigation{
     padding: 5%;
 }
@@ -38,9 +39,26 @@ h2{
 .text{
     padding: 5%;
 }
+
+.calculator-body{
+    width: 350px;
+    max-height: 620px;
+    background-color: #47648a;
+    box-shadow: 0 10px 6px -6px #000;
+    border: 2px solid #283950;
+    border-radius: 5px;
+}
+
 #sidebar{
     width: 20%;
     height: 100%;
     margin: 1%;
     border-right: 1px solid #EDF67D;
+}
+#active-content{
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
