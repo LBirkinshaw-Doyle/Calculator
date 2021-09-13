@@ -1,3 +1,9 @@
+@keyframes blink {
+    0% {color: #00487C;}
+    69% {color: #00487C;}
+    70% {color: transparent;}
+    100% {color: transparent;}
+}
 html{
     height: 100%;
     margin: 0;
@@ -60,6 +66,10 @@ h2{
     justify-content: space-between;
 }
 .calculator-display{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
     margin: 5% 5% 2.5%;
     min-height: 50px;
     height: 15%;
@@ -104,6 +114,7 @@ h2{
 .operator:hover{
     background: rgb(214, 90, 90)
 }
+
 #sidebar{
     width: 20%;
     height: 100%;
@@ -116,4 +127,12 @@ h2{
     flex-direction: row;
     justify-content: center;
     align-items: center;
+}
+#display{
+    animation-name: blink;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
+#result{
+    font-size: large;
 }
