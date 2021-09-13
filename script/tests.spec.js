@@ -45,5 +45,14 @@ describe('multiply', () => {
 	test('mult with negative numbers', () => {
 		expect(calculator.evaluate("-2-3*5").toBe(-17));
 	});
-	
+	test('multiple multiplication', () => {
+		expect(calculator.evaluate("2*-2*3+2").toBe(-10));
+	});
+	test("sum of two multiplications", () => {
+		expect(calculator.evaluate("32*10-16*5").toBe(240));
+	});
+});
+
+describe('divide', () => {
+
 });
