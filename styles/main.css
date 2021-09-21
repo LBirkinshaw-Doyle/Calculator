@@ -112,7 +112,13 @@ h2{
     background: rgb(100, 167, 206);
 }
 .operator:hover{
-    background: rgb(214, 90, 90)
+    background: rgb(100, 194, 206)
+}
+.equality{
+    background: rgb(100, 206, 135);
+}
+.equality:hover{
+    background: rgb(47, 238, 111)
 }
 
 #sidebar{
