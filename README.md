@@ -1,6 +1,7 @@
 # Calculator
 
 ## Test Cases:
+A series of Test cases, developed prior to writing detailed pseudocode.
 <details>
 <summary>Addition & Subtraction</summary>
 
