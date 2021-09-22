@@ -57,6 +57,7 @@ h2{
     width: 350px;
     height: 70%;
     max-height: 620px;
+    min-height: 250px;
     background-color: #324864;
     box-shadow: 0 10px 6px -6px #000;
     border: 2px solid #283950;
@@ -120,6 +121,11 @@ h2{
 .equality:hover{
     background: rgb(47, 238, 111)
 }
+.blink{
+    animation-name: blink;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
 
 #sidebar{
     width: 20%;
@@ -133,11 +139,6 @@ h2{
     flex-direction: row;
     justify-content: center;
     align-items: center;
-}
-#display{
-    animation-name: blink;
-    animation-duration: 1s;
-    animation-iteration-count: infinite;
 }
 #result{
     font-size: large;
