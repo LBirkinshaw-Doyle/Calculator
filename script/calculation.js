@@ -6,9 +6,14 @@ let operatorButtonArray = [];
 numberButtonArray = document.querySelectorAll(".number");
 operatorButtonArray = document.querySelectorAll(".operator");
 const display = document.querySelector("#display");
+const result = document.querySelector('#result');
+const equalButton = document.querySelector(".equality");
 
 numberButtonArray.forEach((element) => element.addEventListener("click", parseInput));
 operatorButtonArray.forEach((element) => element.addEventListener("click", parseInput));
+
+equalButton.addEventListener("click", evaluate);
+
 
 function parseInput (click) {
     let button = click.target;
@@ -37,5 +42,13 @@ function parseInput (click) {
 
     display.textContent = displayString;
     display.classList.remove("blink");
-    console.log(displayString, calculationString);
+}
+
+function evaluate () {
+    let calculationArray;
+
+    calculationArray = calculationString.split(" ")
+                                        .map((item) => Number(item)? Number(item) : item);
+    console.log(calculationArray);
+    
 }
