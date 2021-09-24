@@ -49,6 +49,19 @@ function evaluate () {
 
     calculationArray = calculationString.split(" ")
                                         .map((item) => Number(item)? Number(item) : item);
+    calculationArray = divide(calculationArray);
     console.log(calculationArray);
     
+}
+
+function divide (calculationArray) {
+    console.log(calculationArray)
+    let holdingArray = calculationArray;
+    let index;
+    const divideFind = (e) => e === "/";
+    while (holdingArray.findIndex(divideFind) >= 0) {
+        index = holdingArray.findIndex(divideFind);
+        holdingArray.splice(index-1, 3, holdingArray[index-1] / holdingArray[index+1]);
+    }
+    return holdingArray;
 }
