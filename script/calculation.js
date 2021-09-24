@@ -62,6 +62,7 @@ function divide (calculationArray) {
     const divideFind = (e) => e === "/";
     while (holdingArray.findIndex(divideFind) >= 0) {
         index = holdingArray.findIndex(divideFind);
+        if (holdingArray[index-1] === ""||holdingArray[index+1] === "") {return ["INPUT ERROR"]}
         holdingArray.splice(index-1, 3, holdingArray[index-1] / holdingArray[index+1]);
     }
     return holdingArray;
@@ -73,6 +74,7 @@ function multiply (calculationArray) {
     const multiplyFind = (e) => e === "*";
     while (holdingArray.findIndex(multiplyFind) >= 0) {
         index = holdingArray.findIndex(multiplyFind);
+        if (holdingArray[index-1] === ""||holdingArray[index+1] === "") {return ["INPUT ERROR"]}
         holdingArray.splice(index-1, 3, holdingArray[index-1] * holdingArray[index+1]);
     }
     return holdingArray;
