@@ -51,8 +51,8 @@ function evaluate () {
                                         .map((item) => Number(item)? Number(item) : item);
     calculationArray = divide(calculationArray);
     calculationArray = multiply(calculationArray);
-    calculationArray = add(calculationArray);
     calculationArray = subtract(calculationArray);
+    calculationArray = add(calculationArray);
     console.log(calculationArray);
     
 }
@@ -65,7 +65,7 @@ function divide (calculationArray) {
     while (holdingArray.findIndex(divideFind) >= 0) {
         index = holdingArray.findIndex(divideFind);
         if (holdingArray[index-1] === ""||holdingArray[index+1] === "") {return ["INPUT ERROR"]}
-        holdingArray.splice(index-1, 3, holdingArray[index-1] / holdingArray[index+1]);
+        holdingArray.splice(index, 2, "*", 1 / holdingArray[index+1]);
     }
     return holdingArray;
 }
@@ -99,7 +99,7 @@ function subtract (calculationArray) {
     const subtractFind = (e) => e === "-";
     while (holdingArray.findIndex(subtractFind) >= 0) {
         index = holdingArray.findIndex(subtractFind);
-        holdingArray.splice(index-1, 3, holdingArray[index-1] - holdingArray[index+1]);
+        holdingArray.splice(index, 2, "+", -holdingArray[index+1]);
     }
     return holdingArray;
 }
