@@ -49,9 +49,10 @@ function evaluate () {
 
     calculationArray = calculationString.split(" ")
                                         .map((item) => Number(item)? Number(item) : item);
+
+    calculationArray = convertNegatives(calculationArray);
     calculationArray = divide(calculationArray);
     calculationArray = multiply(calculationArray);
-    calculationArray = subtract(calculationArray);
     calculationArray = add(calculationArray);
     console.log(calculationArray);
     
@@ -92,14 +93,16 @@ function add (calculationArray) {
     }
     return holdingArray;
 }
-function subtract (calculationArray) {
+function convertNegatives (calculationArray) {
     console.log(calculationArray)
     let holdingArray = calculationArray;
     let index;
     const subtractFind = (e) => e === "-";
     while (holdingArray.findIndex(subtractFind) >= 0) {
         index = holdingArray.findIndex(subtractFind);
-        holdingArray.splice(index, 2, "+", -holdingArray[index+1]);
+        if (holdingArray[index-1] === "") {holdingArray.splice(index, 2, -holdingArray[index+1]);}
+        else if (holdingArray[index+1] === "") {return ["INPUT ERROR"]}
+        else {holdingArray.splice(index, 2, "+", -holdingArray[index+1]);}
     }
     return holdingArray;
 }
