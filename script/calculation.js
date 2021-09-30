@@ -19,20 +19,27 @@ function parseInput (click) {
     let button = click.target;
     let input
     button.firstChild? input = String(button.firstChild.textContent) : input = String(button.textContent);
+    console.log(input);
     
     displayString += input; 
     
     switch (input) {
         case operatorButtonArray[0].firstChild.textContent:
-            calculationString += " * ";
+            calculationString += " ( ";
         break;
         case operatorButtonArray[1].firstChild.textContent:
-            calculationString += " / ";
+            calculationString += " ) ";
         break;
         case operatorButtonArray[2].firstChild.textContent:
-            calculationString += " - ";
+            calculationString += " * ";
         break;
         case operatorButtonArray[3].firstChild.textContent:
+            calculationString += " / ";
+        break;
+        case operatorButtonArray[4].firstChild.textContent:
+            calculationString += " - ";
+        break;
+        case operatorButtonArray[5].firstChild.textContent:
             calculationString += " + ";
         break;
         default:
@@ -47,15 +54,37 @@ function parseInput (click) {
 function evaluate () {
     let calculationArray;
 
-    calculationArray = calculationString.split(" ")
-                                        .map((item) => Number(item)? Number(item) : item);
-
-    calculationArray = convertNegatives(calculationArray);
-    calculationArray = divide(calculationArray);
-    calculationArray = multiply(calculationArray);
-    calculationArray = add(calculationArray);
-    console.log(calculationArray);
+    calculationArray = calculationString.split(" ").map((item) => Number(item)? Number(item) : item);
     
+    let answer = calculate(calculationArray);
+    
+}
+
+function calculate (inputArray) {
+    const openBracketFind = (e) => e === "(";
+    const closeBracketFind = (e) => e === ")";
+    let openBracketPresent = inputArray.findIndex(openBracketFind) >= 0
+    let closeBracketPresent = inputArray.findIndex(closeBracketFind) >= 0
+    let holdingArray = inputArray;
+    let reversedArray = inputArray.slice().reverse(); 
+
+    if (openBracketPresent && closeBracketPresent) {
+        let openIndex = holdingArray.findIndex(openBracketFind);
+        let closeIndex = holdingArray.length - 1 - reversedArray.findIndex(closeBracketFind);
+        let spliceLength = closeIndex - openIndex;
+        let sliceArray = holdingArray.slice(openIndex+1, closeIndex);
+
+        holdingArray = holdingArray.splice(openIndex, spliceLength, calculate(sliceArray));
+    }
+    else if (!(openBracketPresent && closeBracketPresent) && (openBracketPresent || closeBracketPresent)) {
+        return ["INPUT ERROR"]
+    }
+    
+    holdingArray = convertNegatives(holdingArray);
+    holdingArray = divide(holdingArray);
+    holdingArray = multiply(holdingArray);
+    holdingArray = add(holdingArray);
+    return holdingArray;
 }
 
 function divide (calculationArray) {
@@ -71,7 +100,6 @@ function divide (calculationArray) {
     return holdingArray;
 }
 function multiply (calculationArray) {
-    console.log(calculationArray)
     let holdingArray = calculationArray;
     let index;
     const multiplyFind = (e) => e === "*";
@@ -83,7 +111,6 @@ function multiply (calculationArray) {
     return holdingArray;
 }
 function add (calculationArray) {
-    console.log(calculationArray)
     let holdingArray = calculationArray;
     let index;
     const addFind = (e) => e === "+";
@@ -94,7 +121,6 @@ function add (calculationArray) {
     return holdingArray;
 }
 function convertNegatives (calculationArray) {
-    console.log(calculationArray)
     let holdingArray = calculationArray;
     let index;
     const subtractFind = (e) => e === "-";
