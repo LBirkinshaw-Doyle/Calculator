@@ -19,7 +19,6 @@ function parseInput (click) {
     let button = click.target;
     let input
     button.firstChild? input = String(button.firstChild.textContent) : input = String(button.textContent);
-    console.log(input);
     
     displayString += input; 
     
@@ -55,6 +54,7 @@ function evaluate () {
     let calculationArray;
 
     calculationArray = calculationString.split(" ").map((item) => Number(item)? Number(item) : item);
+    console.log(calculationString, calculationArray);
     
     let answer = calculate(calculationArray);
     
@@ -71,15 +71,15 @@ function calculate (inputArray) {
     if (openBracketPresent && closeBracketPresent) {
         let openIndex = holdingArray.findIndex(openBracketFind);
         let closeIndex = holdingArray.length - 1 - reversedArray.findIndex(closeBracketFind);
-        let spliceLength = closeIndex - openIndex;
+        let spliceLength = closeIndex - openIndex + 1;
         let sliceArray = holdingArray.slice(openIndex+1, closeIndex);
-
-        holdingArray = holdingArray.splice(openIndex, spliceLength, calculate(sliceArray));
+        let bracketReturn = calculate(sliceArray);
+        console.log(bracketReturn);
+        holdingArray.splice(openIndex, spliceLength, ...bracketReturn);
     }
     else if (!(openBracketPresent && closeBracketPresent) && (openBracketPresent || closeBracketPresent)) {
         return ["INPUT ERROR"]
     }
-    
     holdingArray = convertNegatives(holdingArray);
     holdingArray = divide(holdingArray);
     holdingArray = multiply(holdingArray);
@@ -124,11 +124,14 @@ function convertNegatives (calculationArray) {
     let holdingArray = calculationArray;
     let index;
     const subtractFind = (e) => e === "-";
-    while (holdingArray.findIndex(subtractFind) >= 0) {
-        index = holdingArray.findIndex(subtractFind);
-        if (holdingArray[index-1] === "") {holdingArray.splice(index, 2, -holdingArray[index+1]);}
-        else if (holdingArray[index+1] === "") {return ["INPUT ERROR"]}
-        else {holdingArray.splice(index, 2, "+", -holdingArray[index+1]);}
+
+    let filteredArray = holdingArray.filter(Boolean);
+    console.log(filteredArray);
+    while (filteredArray.findIndex(subtractFind) >= 0) {
+        index = filteredArray.findIndex(subtractFind);
+        if (filteredArray[index-1] === "") {filteredArray.splice(index, 2, -filteredArray[index+1]);}
+        else if (filteredArray[index+1] === "") {return ["INPUT ERROR"]}
+        else {filteredArray.splice(index, 2, "+", -filteredArray[index+1]);}
     }
-    return holdingArray;
+    return filteredArray;
 }
