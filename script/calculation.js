@@ -59,7 +59,7 @@ function evaluate () {
     let answer = calculate(calculationArray);
     
 }
-
+/*
 function calculate (inputArray) {
     const openBracketFind = (e) => e === "(";
     const closeBracketFind = (e) => e === ")";
@@ -135,3 +135,4 @@ function convertNegatives (calculationArray) {
     }
     return filteredArray;
 }
+*/
