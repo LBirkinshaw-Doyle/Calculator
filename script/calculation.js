@@ -52,12 +52,28 @@ function parseInput (click) {
 
 function evaluate () {
     let calculationArray;
+    let holdingArray;
 
     calculationArray = calculationString.split(" ").map((item) => Number(item)? Number(item) : item);
     console.log(calculationString, calculationArray);
+    holdingArray = removeBlankSpaces(calculationArray); // remove blanks spaces caused by two operators next to each other
+    holdingArray = resolveNegatives(holdingArray); // handle negatives so that all numbers are either positive or negative with addition as necessary
     
-    let answer = calculate(calculationArray);
+    let answer = calculate(holdingArray); //find the result
+    console.log(answer);
+
+    // add answer to display here.
     
+}
+
+function calculate (inputArray) {
+    let holdingArray = inputArray;
+
+    holdingArray = evaluateBrackets(holdingArray); //send to a recursive function that evaluates bracketed expressions
+    holdingArray = divide(holdingArray); // send to a function that turns division problems to multiplication
+    holdingArray = multiply(holdingArray); // multiply
+    holdingArray = add(holdingArray); // add
+    return holdingArray;
 }
 /*
 function calculate (inputArray) {
