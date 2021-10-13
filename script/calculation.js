@@ -57,7 +57,7 @@ function evaluate () {
     calculationArray = calculationString.split(" ").map((item) => Number(item)? Number(item) : item);
     console.log(calculationString, calculationArray);
     holdingArray = removeBlankSpaces(calculationArray); // remove blanks spaces caused by two operators next to each other
-    holdingArray = resolveNegatives(holdingArray); // handle negatives so that all numbers are either positive or negative with addition as necessary
+    
     
     let answer = calculate(holdingArray); //find the result
     console.log(answer);
@@ -70,10 +70,38 @@ function calculate (inputArray) {
     let holdingArray = inputArray;
 
     holdingArray = evaluateBrackets(holdingArray); //send to a recursive function that evaluates bracketed expressions
+    holdingArray = resolveNegatives(holdingArray); // handle negatives so that all numbers are either positive or negative with addition as necessary
     holdingArray = divide(holdingArray); // send to a function that turns division problems to multiplication
     holdingArray = multiply(holdingArray); // multiply
     holdingArray = add(holdingArray); // add
     return holdingArray;
+}
+
+function removeBlankSpaces (inputArray) {
+    let filteredArray = holdingArray.filter(Boolean);
+    console.log("removal of blank spaces: ", filteredArray)
+    return filteredArray;
+}
+
+function resolveNegatives (inputArray) {
+    let holdingArray = calculationArray;
+    let index;
+    let nextSymbol;
+    const subtractFind = (e) => e === "-";
+
+    while (holdingArray.findIndex(subtractFind) >= 0) {
+        index = holdingArray.findIndex(subtractFind);
+        nextSymbol = holdingArray[index+1];
+        if (!isNAN(nextSymbol)) {filteredArray.splice(index, 2, "+", -nextSymbol);}
+        else if (nextSymbol === "*" || nextSymbol === "/") {return ["INPUT ERROR"];}
+        else if (nextSymbol === "+") {filteredArray.splice(index, 2, "-");}
+        else if (nextSymbol === "-") {filteredArray.splice(index, 2, "+");}
+        else {
+            console.log("something strange happened in resolveNegatives: ", index, nextSymbol, holdingArray);
+            return ["INPUT ERROR"];
+        }
+    }
+    return filteredArray;
 }
 /*
 function calculate (inputArray) {
