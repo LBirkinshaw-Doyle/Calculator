@@ -138,6 +138,41 @@ function divide (inputArray) {
     }
     return holdingArray;
 }
+
+function multiply (inputArray) {
+    let holdingArray = inputArray;
+    let index;
+    let nextSymbol;
+    let previousSymbol;
+    const multiplyFind = (e) => e === "*";
+
+    while (holdingArray.findIndex(multiplyFind) >= 0) {
+        index = holdingArray.findIndex(multiplyFind);
+        if (index == 0 || index == holdingArray.length - 1) return ["INPUT ERROR"];
+
+        nextSymbol = holdingArray[index+1];
+        previousSymbol = holdingArray[index-1];
+
+        if (!isNaN(nextSymbol) && !isNaN(previousSymbol)) {
+            holdingArray.splice(index-1, 3, previousSymbol * nextSymbol)
+        }
+        else if (nextSymbol === "*" 
+            || nextSymbol === "/"
+            || nextSymbol === "+"
+            || nextSymbol === "-"
+            || previousSymbol === "/"
+            || previousSymbol === "+"
+            || previousSymbol === "-"
+            ) {
+            return ["INPUT ERROR"];
+        }
+        else {
+            console.log("something strange happened in divide: ", index, previousSymbol, nextSymbol, holdingArray);
+            return ["UNEXPECTED ERROR"];
+        } 
+    }
+    return holdingArray;
+}
 /*
 function calculate (inputArray) {
     const openBracketFind = (e) => e === "(";
