@@ -173,6 +173,34 @@ function multiply (inputArray) {
     }
     return holdingArray;
 }
+
+function add (inputArray) {
+    let holdingArray = inputArray;
+    let index;
+    let nextSymbol;
+    const addFind = (e) => e === "+";
+
+    while (holdingArray.findIndex(addFind) >= 0) {
+        index = holdingArray.findIndex(addFind);
+        if (index == 0 || index == holdingArray.length - 1) return ["INPUT ERROR"];
+
+        nextSymbol = holdingArray[index+1];
+        previousSymbol = holdingArray[index-1];
+
+        if (!isNAN(nextSymbol) && !isNaN(previousSymbol)) {
+            holdingArray.splice(index-1, 3, previousSymbol + nextSymbol)
+        }
+        else if (nextSymbol === "*" || nextSymbol === "/") {return ["INPUT ERROR"];}
+        else if (nextSymbol === "+") {holdingArray.splice(index, 2, "+");}
+        else if (nextSymbol === "-") {holdingArray.splice(index, 2, "-");}
+        else {
+            console.log("something strange happened in add: ", index, nextSymbol, previousSymbol, holdingArray);
+            return ["UNEXPECTED ERROR"];
+        }
+    }
+    return holdingArray;
+}
+
 /*
 function calculate (inputArray) {
     const openBracketFind = (e) => e === "(";
