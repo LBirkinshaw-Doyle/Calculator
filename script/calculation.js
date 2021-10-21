@@ -83,6 +83,49 @@ function removeBlankSpaces (inputArray) {
     return filteredArray;
 }
 
+function evaluateBrackets (inputArray) {
+    let holdingArray = inputArray;
+    let openIndex;
+    let closeIndex;
+    let previousSymbol;
+
+    const openFind = (e) => e === "(";
+    let openBracketCount = holdingArray.filter(x => x === "(").length;
+    let closeBracketCount = holdingArray.filter(x => x === ")").length;
+
+    if (openBracketCount === closeBracketCount) {
+        while (holdingArray.findIndex(openFind) >= 0) {
+            openIndex = undefined;
+            closeIndex = undefined;
+            for (let i = 0; i < holdingArray.length; i++) {
+                if (holdingArray[i] === "(") {
+                    openIndex = i;
+                    i === 0 ? previousSymbol = undefined : previousSymbol = holdingArray[i-1];
+                }
+                else if (holdingArray[i] === ")") {
+                    if (openIndex === undefined) return ["INPUT ERROR"];
+                    if (!isNaN(previousSymbol)) {
+                        holdingArray.splice(openIndex, 0, "*");
+                        openIndex += 1;
+                    }
+                    holdingArray.splice(openIndex, closeIndex - openIndex + 1, ...calculate(holdingArray.slice(openIndex+1, closeIndex)));
+                    break;
+                }
+            }
+        }
+        return holdingArray;
+    }
+    else if (openBracketCount === 0 && closeBracketCount === 0) {
+        return holdingArray;
+    }
+    else {
+        return ["INPUT ERROR"];
+    }
+
+    
+    
+}
+
 function resolveNegatives (inputArray) {
     let holdingArray = inputArray;
     let index;
