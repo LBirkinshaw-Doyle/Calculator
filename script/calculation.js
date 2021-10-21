@@ -89,6 +89,9 @@ function evaluateBrackets (inputArray) {
     let openIndex;
     let closeIndex;
     let previousSymbol;
+    let spliceLength;
+    let calculateSlice;
+    let answerSlice;
 
     const openFind = (e) => e === "(";
     let openBracketCount = holdingArray.filter(x => x === "(").length;
@@ -105,12 +108,20 @@ function evaluateBrackets (inputArray) {
                     i === 0 ? previousSymbol = undefined : previousSymbol = holdingArray[i-1];
                 }
                 else if (holdingArray[i] === ")") {
+                    closeIndex = i;
                     if (openIndex === undefined) return ["INPUT ERROR"];
                     if (typeof previousSymbol === 'number') {
                         holdingArray.splice(openIndex, 0, "*");
                         openIndex += 1;
+                        closeIndex += 1;
                     }
-                    holdingArray.splice(openIndex, closeIndex - openIndex + 1, ...calculate(holdingArray.slice(openIndex+1, closeIndex)));
+                    spliceLength = closeIndex - openIndex + 1;
+                    console.log("slicedeets: ", openIndex, closeIndex, spliceLength);
+                    calculateSlice = holdingArray.slice(openIndex+1, closeIndex);
+                    console.log("calculate slice: ", calculateSlice);
+                    answerSlice = calculate(calculateSlice);
+                    console.log("answer to slice: ", answerSlice);
+                    holdingArray.splice(openIndex, spliceLength, ...answerSlice);
                     break;
                 }
             }
