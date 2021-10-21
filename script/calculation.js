@@ -78,6 +78,7 @@ function calculate (inputArray) {
 }
 
 function removeBlankSpaces (inputArray) {
+    let holdingArray = inputArray;
     let filteredArray = holdingArray.filter(Boolean);
     console.log("removal of blank spaces: ", filteredArray)
     return filteredArray;
@@ -95,6 +96,7 @@ function evaluateBrackets (inputArray) {
 
     if (openBracketCount === closeBracketCount) {
         while (holdingArray.findIndex(openFind) >= 0) {
+            console.log("brackets while: ", holdingArray.slice());
             openIndex = undefined;
             closeIndex = undefined;
             for (let i = 0; i < holdingArray.length; i++) {
@@ -104,7 +106,7 @@ function evaluateBrackets (inputArray) {
                 }
                 else if (holdingArray[i] === ")") {
                     if (openIndex === undefined) return ["INPUT ERROR"];
-                    if (!isNaN(previousSymbol)) {
+                    if (typeof previousSymbol === 'number') {
                         holdingArray.splice(openIndex, 0, "*");
                         openIndex += 1;
                     }
@@ -113,12 +115,15 @@ function evaluateBrackets (inputArray) {
                 }
             }
         }
+        console.log("brackets: ", holdingArray.slice());
         return holdingArray;
     }
     else if (openBracketCount === 0 && closeBracketCount === 0) {
+        console.log("brackets: ", holdingArray.slice());
         return holdingArray;
     }
     else {
+        console.log("brackets: ", holdingArray.slice());
         return ["INPUT ERROR"];
     }
 
@@ -135,15 +140,16 @@ function resolveNegatives (inputArray) {
     while (holdingArray.findIndex(subtractFind) >= 0) {
         index = holdingArray.findIndex(subtractFind);
         nextSymbol = holdingArray[index+1];
-        if (!isNAN(nextSymbol)) {holdingArray.splice(index, 2, "+", -nextSymbol);}
+        if (typeof nextSymbol === 'number') {holdingArray.splice(index, 2, "+", -nextSymbol);}
         else if (nextSymbol === "*" || nextSymbol === "/") {return ["INPUT ERROR"];}
         else if (nextSymbol === "+") {holdingArray.splice(index, 2, "-");}
         else if (nextSymbol === "-") {holdingArray.splice(index, 2, "+");}
         else {
-            console.log("something strange happened in resolveNegatives: ", index, nextSymbol, holdingArray);
+            console.log("something strange happened in resolveNegatives: ", index, nextSymbol, holdingArray.slice());
             return ["UNEXPECTED ERROR"];
         }
     }
+    console.log("negatives: ", holdingArray.slice());
     return holdingArray;
 }
 
@@ -161,7 +167,7 @@ function divide (inputArray) {
         nextSymbol = holdingArray[index+1];
         previousSymbol = holdingArray[index-1];
 
-        if (!isNaN(nextSymbol) && !isNaN(previousSymbol)) {
+        if (typeof nextSymbol === 'number' && typeof previousSymbol === 'number') {
             holdingArray.splice(index-1, 3, previousSymbol / nextSymbol)
         }
         else if (nextSymbol === "*" 
@@ -179,6 +185,7 @@ function divide (inputArray) {
             return ["UNEXPECTED ERROR"];
         } 
     }
+    console.log("divide: ", holdingArray.slice());
     return holdingArray;
 }
 
@@ -196,7 +203,7 @@ function multiply (inputArray) {
         nextSymbol = holdingArray[index+1];
         previousSymbol = holdingArray[index-1];
 
-        if (!isNaN(nextSymbol) && !isNaN(previousSymbol)) {
+        if (typeof nextSymbol === 'number' && typeof previousSymbol === 'number') {
             holdingArray.splice(index-1, 3, previousSymbol * nextSymbol)
         }
         else if (nextSymbol === "*" 
@@ -214,6 +221,7 @@ function multiply (inputArray) {
             return ["UNEXPECTED ERROR"];
         } 
     }
+    console.log("multiply: ", holdingArray.slice());
     return holdingArray;
 }
 
@@ -230,7 +238,7 @@ function add (inputArray) {
         nextSymbol = holdingArray[index+1];
         previousSymbol = holdingArray[index-1];
 
-        if (!isNAN(nextSymbol) && !isNaN(previousSymbol)) {
+        if (typeof nextSymbol === 'number' && typeof previousSymbol === 'number') {
             holdingArray.splice(index-1, 3, previousSymbol + nextSymbol)
         }
         else if (nextSymbol === "*" || nextSymbol === "/") {return ["INPUT ERROR"];}
@@ -241,6 +249,7 @@ function add (inputArray) {
             return ["UNEXPECTED ERROR"];
         }
     }
+    console.log("add: ", holdingArray.slice());
     return holdingArray;
 }
 
