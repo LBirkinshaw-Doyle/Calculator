@@ -63,6 +63,7 @@ function evaluate () {
     console.log(answer);
 
     // add answer to display here.
+    result.textContent = answer.toString();
     
 }
 
