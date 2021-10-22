@@ -8,11 +8,15 @@ operatorButtonArray = document.querySelectorAll(".operator");
 const display = document.querySelector("#display");
 const result = document.querySelector('#result');
 const equalButton = document.querySelector(".equality");
+const clearButton = document.querySelector('#clear');
+const clearEverythingButton = document.querySelector('#clear-everything');
 
 numberButtonArray.forEach((element) => element.addEventListener("click", parseInput));
 operatorButtonArray.forEach((element) => element.addEventListener("click", parseInput));
 
 equalButton.addEventListener("click", evaluate);
+clearButton.addEventListener("click", clear);
+clearEverythingButton.addEventListener("click", clearEverything);
 
 
 function parseInput (click) {
@@ -263,6 +267,25 @@ function add (inputArray) {
     }
     console.log("add: ", holdingArray.slice());
     return holdingArray;
+}
+
+function clear () {
+    if (calculationString.slice(-1) === " ") {
+        calculationString = calculationString.slice(0, calculationString.length-3)
+    }
+    else {
+        calculationString = calculationString.slice(0, calculationString.length-1)
+    }
+    displayString = displayString.slice(0, displayString.length-1)
+    display.textContent = displayString;
+}
+
+function clearEverything () {
+    calculationString = ""
+    displayString = ""
+    display.textContent = "Calculate!";
+    result.textContent = ""
+    display.classList.add('blink');
 }
 
 /*
