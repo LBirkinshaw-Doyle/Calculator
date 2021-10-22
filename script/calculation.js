@@ -59,12 +59,10 @@ function evaluate () {
     let holdingArray;
 
     calculationArray = calculationString.split(" ").map((item) => Number(item)? Number(item) : item);
-    console.log(calculationString, calculationArray);
     holdingArray = removeBlankSpaces(calculationArray); // remove blanks spaces caused by two operators next to each other
     
     
     let answer = calculate(holdingArray); //find the result
-    console.log(answer);
 
     // add answer to display here.
     result.textContent = answer.toString();
@@ -85,7 +83,6 @@ function calculate (inputArray) {
 function removeBlankSpaces (inputArray) {
     let holdingArray = inputArray;
     let filteredArray = holdingArray.filter(Boolean);
-    console.log("removal of blank spaces: ", filteredArray)
     return filteredArray;
 }
 
@@ -104,7 +101,6 @@ function evaluateBrackets (inputArray) {
 
     if (openBracketCount === closeBracketCount) {
         while (holdingArray.findIndex(openFind) >= 0) {
-            console.log("brackets while: ", holdingArray.slice());
             openIndex = undefined;
             closeIndex = undefined;
             for (let i = 0; i < holdingArray.length; i++) {
@@ -121,25 +117,19 @@ function evaluateBrackets (inputArray) {
                         closeIndex += 1;
                     }
                     spliceLength = closeIndex - openIndex + 1;
-                    console.log("slicedeets: ", openIndex, closeIndex, spliceLength);
                     calculateSlice = holdingArray.slice(openIndex+1, closeIndex);
-                    console.log("calculate slice: ", calculateSlice);
                     answerSlice = calculate(calculateSlice);
-                    console.log("answer to slice: ", answerSlice);
                     holdingArray.splice(openIndex, spliceLength, ...answerSlice);
                     break;
                 }
             }
         }
-        console.log("brackets: ", holdingArray.slice());
         return holdingArray;
     }
     else if (openBracketCount === 0 && closeBracketCount === 0) {
-        console.log("brackets: ", holdingArray.slice());
         return holdingArray;
     }
     else {
-        console.log("brackets: ", holdingArray.slice());
         return ["INPUT ERROR"];
     }
 
@@ -161,11 +151,9 @@ function resolveNegatives (inputArray) {
         else if (nextSymbol === "+") {holdingArray.splice(index, 2, "-");}
         else if (nextSymbol === "-") {holdingArray.splice(index, 2, "+");}
         else {
-            console.log("something strange happened in resolveNegatives: ", index, nextSymbol, holdingArray.slice());
             return ["UNEXPECTED ERROR"];
         }
     }
-    console.log("negatives: ", holdingArray.slice());
     return holdingArray;
 }
 
@@ -197,11 +185,9 @@ function divide (inputArray) {
             return ["INPUT ERROR"];
         }
         else {
-            console.log("something strange happened in divide: ", index, previousSymbol, nextSymbol, holdingArray);
             return ["UNEXPECTED ERROR"];
         } 
     }
-    console.log("divide: ", holdingArray.slice());
     return holdingArray;
 }
 
@@ -233,11 +219,9 @@ function multiply (inputArray) {
             return ["INPUT ERROR"];
         }
         else {
-            console.log("something strange happened in divide: ", index, previousSymbol, nextSymbol, holdingArray);
             return ["UNEXPECTED ERROR"];
         } 
     }
-    console.log("multiply: ", holdingArray.slice());
     return holdingArray;
 }
 
@@ -261,11 +245,9 @@ function add (inputArray) {
         else if (nextSymbol === "+") {holdingArray.splice(index, 2, "+");}
         else if (nextSymbol === "-") {holdingArray.splice(index, 2, "-");}
         else {
-            console.log("something strange happened in add: ", index, nextSymbol, previousSymbol, holdingArray);
             return ["UNEXPECTED ERROR"];
         }
     }
-    console.log("add: ", holdingArray.slice());
     return holdingArray;
 }
 
