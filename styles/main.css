@@ -134,11 +134,27 @@ h2{
 }
 
 #sidebar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
     width: 20%;
     height: 100%;
     margin: 1%;
     border-right: 1px solid #00487C;
 }
+#github-link{
+    width: 80%;
+}
+#github-slider{
+    width: 100%;
+    height: 32px;
+    border: 2px solid #283950;
+    border-radius: 15px;
+    background-color: #00487C
+}
+
+
 #active-content{
     width: 80%;
     display: flex;
