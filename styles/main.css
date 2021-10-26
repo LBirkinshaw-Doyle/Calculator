@@ -158,6 +158,9 @@ h2{
     margin: auto;
     padding: 0 15px;
 }
+#github-logo{
+    transition: all 0.5s ease-in-out;
+}
 
 
 #active-content{

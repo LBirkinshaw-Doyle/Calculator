@@ -10,6 +10,8 @@ const result = document.querySelector('#result');
 const equalButton = document.querySelector(".equality");
 const clearButton = document.querySelector('#clear');
 const clearEverythingButton = document.querySelector('#clear-everything');
+const githubLink = document.querySelector("#github-link");
+const githubLogo = document.querySelector("#github-logo");
 
 numberButtonArray.forEach((element) => element.addEventListener("click", parseInput));
 operatorButtonArray.forEach((element) => element.addEventListener("click", parseInput));
@@ -17,6 +19,9 @@ operatorButtonArray.forEach((element) => element.addEventListener("click", parse
 equalButton.addEventListener("click", evaluate);
 clearButton.addEventListener("click", clear);
 clearEverythingButton.addEventListener("click", clearEverything);
+
+githubLink.addEventListener("pointerenter", () => githubLogo.style.transform = "rotate(540deg)");
+githubLink.addEventListener("pointerleave", () => githubLogo.style.transform = "rotate(0deg)");
 
 
 function parseInput (click) {
