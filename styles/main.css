@@ -143,15 +143,20 @@ h2{
     margin: 1%;
     border-right: 1px solid #00487C;
 }
-#github-link{
-    width: 80%;
-}
 #github-slider{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
     width: 100%;
     height: 32px;
     border: 2px solid #283950;
-    border-radius: 15px;
+    border-radius: 20px;
     background-color: #00487C
+}
+#github-text{
+    color: #fff;
+    margin: auto;
+    padding: 0 15px;
 }
 
 
