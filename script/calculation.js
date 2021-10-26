@@ -146,12 +146,18 @@ function resolveNegatives (inputArray) {
     let holdingArray = inputArray;
     let index;
     let nextSymbol;
+    let previousSymbol;
     const subtractFind = (e) => e === "-";
 
     while (holdingArray.findIndex(subtractFind) >= 0) {
         index = holdingArray.findIndex(subtractFind);
         nextSymbol = holdingArray[index+1];
-        if (typeof nextSymbol === 'number') {holdingArray.splice(index, 2, "+", -nextSymbol);}
+        index >= 1 ? previousSymbol=holdingArray[index-1] : previousSymbol=undefined;
+        previousIsOperator = (previousSymbol === "*" || previousSymbol === "/" || previousSymbol === "+");
+
+        if (index === 0 && typeof nextSymbol === 'number') {holdingArray.splice(index, 2, -nextSymbol);}
+        else if (typeof nextSymbol === 'number' && typeof previousSymbol === 'number') {holdingArray.splice(index, 2, "+", -nextSymbol);}
+        else if (typeof nextSymbol === 'number' && previousIsOperator) {holdingArray.splice(index, 2, -nextSymbol);}
         else if (nextSymbol === "*" || nextSymbol === "/") {return ["INPUT ERROR"];}
         else if (nextSymbol === "+") {holdingArray.splice(index, 2, "-");}
         else if (nextSymbol === "-") {holdingArray.splice(index, 2, "+");}
